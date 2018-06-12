@@ -45,10 +45,9 @@ const keyboard = Markup.inlineKeyboard([
 bot.onText(/메뉴/, (msg, match) => {
   var text = "원하는 기능을 선택해주세요.";
   bot.sendMessage(msg.chat.id, text);
-  return;
 });
 
-/*bot.onText(/.+/, (msg, match) => {
+bot.onText(/.+/, (msg, match) => {
     
    var result;
 
@@ -119,7 +118,7 @@ bot.onText(/메뉴/, (msg, match) => {
   })
   .catch(err => {
     console.error('ERROR about sessionClient :', err);
-  });*/
+  });
 
 
 });
