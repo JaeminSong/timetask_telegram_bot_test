@@ -19,11 +19,11 @@ const getToken = (function(){
 })();
 const bot = new TelegramBot(getToken(), {polling: true});
 
-const projectId = 'timetask-telegram-bot';
+/*const projectId = 'timetask-telegram-bot';
 const sessionId = uuidv1();
 
 const sessionClient = new dialogflow.SessionsClient({keyFilename:'./timetask-telegram-bot-49ebe8b01110.json'})
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+const sessionPath = sessionClient.sessionPath(projectId, sessionId);*/
 
 var fcm = new FCM(serverKey);
 
@@ -47,7 +47,7 @@ bot.onText(/메뉴/, (msg, match) => {
   bot.sendMessage(msg.chat.id, text);
 });
 
-bot.onText(/.+/, (msg, match) => {
+/*bot.onText(/.+/, (msg, match) => {
     
    var result;
 
@@ -121,7 +121,7 @@ bot.onText(/.+/, (msg, match) => {
   });
 
 
-});
+});*/
 
 
 
