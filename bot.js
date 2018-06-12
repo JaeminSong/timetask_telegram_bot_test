@@ -47,7 +47,7 @@ bot.onText(/메뉴/, function(msg, match) {
   bot.sendMessage(msg.chat.id, text);
 });
 
-bot.onText(/.+/, (msg, match) => {
+/*bot.onText(/.+/, (msg, match) => {
     
    var result;
 
@@ -118,7 +118,7 @@ bot.onText(/.+/, (msg, match) => {
   })
   .catch(err => {
     console.error('ERROR about sessionClient :', err);
-  });
+  });*/
 
 
 });
