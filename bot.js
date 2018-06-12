@@ -58,7 +58,8 @@ bot.onText(/날씨/, (msg, match) => {
       var city = $("location:nth-child(1) > city").text();
       var date = $("channel:nth-child(1) > pubDate").text() + ' 발표';
       bot.sendMessage(msg.chat.id, date);
-      bot.sendMessage(msg.chat.id, '온도: '+$("data:nth-child(1) > temp").text()+', '++$("data:nth-child(1) > wfKor").text());
+      var temp = '온도: '+$("data:nth-child(1) > temp").text()+', '+$("data:nth-child(1) > wfKor").text();
+      bot.sendMessage(msg.chat.id, temp);
       // 필요한 항목을 추출해서 표시 ---------------------- (※1)
       /*$("location:nth-child(1) > data").each(function(idx) {
     
