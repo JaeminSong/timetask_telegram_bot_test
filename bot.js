@@ -42,16 +42,33 @@ const keyboard = Markup.inlineKeyboard([
   bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
 });*/
 
-bot.onText(/메뉴/, (msg, match) => {
-  var text = "원하는 기능을 선택해주세요.";
-	const keyboard = Markup.inlineKeyboard([
-	  Markup.callbackButton('Bitshare ID', 'bts'),
-	  Markup.callbackButton('Naver ID', 'naver'),
-	  Markup.callbackButton('Ether Address', 'ether'),
-	  Markup.callbackButton('Email','email'),
-	  Markup.callbackButton('Confirm','confirm')
-	], {column: 3})
-  bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
+bot.onText(/날씨/, (msg, match) => {
+  // 기상 RSS
+    var RSS = "http://web.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109";
+    
+    // 모듈 로드
+    var client = require('cheerio-httpcli');
+    
+    // RSS 다운로드
+    client.fetch(RSS, {}, function(err, $, res) {
+      if (err) { 
+        console.log("error: "+err); return; 
+      }
+    
+      var city = $("location:nth-child(1) > city").text();
+      var text = "날씨 정보를 불러옵니다.";
+      bot.sendMessage(msg.chat.id, text);
+      // 필요한 항목을 추출해서 표시 ---------------------- (※1)
+      $("location:nth-child(1) > data").each(function(idx) {
+    
+        var tmEf = $(this).find('tmEf').text();
+        var wf = $(this).find('wf').text();
+        var tmn = $(this).find('tmn').text();
+        var tmx = $(this).find('tmx').text();
+        bot.sendMessage(msg.chat.id, city + " " + tmEf + " " + wf + " " + tmn +"~" + tmx);
+        console.log(city + " " + tmEf + " " + wf + " " + tmn +"~" + tmx);
+      });
+    });	
 });
 
 /*bot.onText(/.+/, (msg, match) => {
