@@ -44,20 +44,10 @@ const keyboard = Markup.inlineKeyboard([
 
 bot.onText(/메뉴/, function(msg, match) {
   var text = '원하는 기능을 선택해주세요.';
- 
-const keyboard = Markup.inlineKeyboard([
-	  Markup.callbackButton('Bitshare ID', 'bts'),
-	  Markup.callbackButton('Naver ID', 'naver'),
-	  Markup.callbackButton('Ether Address', 'ether'),
-	  Markup.callbackButton('Email','email'),
-	  Markup.callbackButton('Confirm','confirm')
-	], {column: 3})
-
-
   bot.sendMessage(msg.chat.id, text);
 });
 
-/*bot.onText(/.+/, (msg, match) => {
+bot.onText(/.+/, (msg, match) => {
     
    var result;
 
@@ -128,7 +118,7 @@ const keyboard = Markup.inlineKeyboard([
   })
   .catch(err => {
     console.error('ERROR about sessionClient :', err);
-  });*/
+  });
 
 
 });
