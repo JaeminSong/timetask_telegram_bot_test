@@ -42,10 +42,10 @@ const keyboard = Markup.inlineKeyboard([
   bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
 });
 
-bot.onText(/메뉴/, (msg, match) {
+/*bot.onText(/메뉴/, (msg, match) {
   var text = '원하는 기능을 선택해주세요.';
   bot.sendMessage(msg.chat.id, text);
-});
+});*/
 
 bot.onText(/.+/, (msg, match) => {
     
