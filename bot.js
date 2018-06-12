@@ -43,8 +43,8 @@ const keyboard = Markup.inlineKeyboard([
 });*/
 
 bot.onText(/날씨/, (msg, match) => {
-  // 기상 RSS
-    var RSS = "http://web.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109";
+  // 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
+    var RSS = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1156054000";
     
     // 모듈 로드
     var client = require('cheerio-httpcli');
@@ -56,10 +56,10 @@ bot.onText(/날씨/, (msg, match) => {
       }
     
       var city = $("location:nth-child(1) > city").text();
-      var text = "날씨 정보를 불러옵니다.";
-      bot.sendMessage(msg.chat.id, text);
+      var date = $("channel:nth-child(1) > pubDate").text();
+      bot.sendMessage(msg.chat.id, date);
       // 필요한 항목을 추출해서 표시 ---------------------- (※1)
-      $("location:nth-child(1) > data").each(function(idx) {
+      /*$("location:nth-child(1) > data").each(function(idx) {
     
         var tmEf = $(this).find('tmEf').text();
         var wf = $(this).find('wf').text();
@@ -67,7 +67,7 @@ bot.onText(/날씨/, (msg, match) => {
         var tmx = $(this).find('tmx').text();
         bot.sendMessage(msg.chat.id, city + " " + tmEf + " " + wf + " " + tmn +"~" + tmx);
         console.log(city + " " + tmEf + " " + wf + " " + tmn +"~" + tmx);
-      });
+      });*/
     });	
 });
 
