@@ -54,7 +54,7 @@ const keyboard = Markup.inlineKeyboard([
 	], {column: 3})
 
 
-  bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
+  bot.sendMessage(msg.chat.id, text);
 });
 
 /*bot.onText(/.+/, (msg, match) => {
