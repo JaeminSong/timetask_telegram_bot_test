@@ -42,6 +42,24 @@ const keyboard = Markup.inlineKeyboard([
   bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
 });*/
 
+bot.onText(/\/메뉴/, function(msg, match) {
+  var text = '원하시는 메뉴를 선택하세요.';
+ 
+  var keyboardStr = JSON.stringify({
+      inline_keyboard: [
+        [
+          {text:'일정 등록',callback_data:'callback_schedule'},
+          {text:'날씨',callback_data:'callback_whether'},
+	  {text:'베터리 정보',callback_data:'callback_battery'},
+	  {text:'메모리 정보',callback_data:'callback_memory'}
+        ]
+      ]
+  });
+ 
+  var keyboard = {reply_markup: JSON.parse(keyboardStr)};
+  bot.sendMessage(msg.chat.id, text, keyboard);
+});
+
 bot.onText(/날씨/, (msg, match) => {
   // 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
     var RSS = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1156054000";
