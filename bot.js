@@ -67,7 +67,10 @@ bot.onText(/\/메뉴/, function(msg, match) {
 });
 
 bot.on('callback_query', function (msg) {
-  bot.answerCallbackQuery(msg.id, 'You hit a button!'+msg.data , false);
+	if(msg.data == 'callback_schedule'){
+		bot.sendMessage(msg.chat.id, '일정 등록을 원하시면 예시와 같은 양식으로 써주세요.(ex: 12월 25일 일정등록, 내일 오후 1시 일정등록)');
+	}
+  //bot.answerCallbackQuery(msg.id, 'You hit a button!'+msg.data , false);
 });
 
 bot.onText(/callback_schedule/, (msg, match) => {
@@ -177,10 +180,6 @@ bot.onText(/callback_memory/, (msg, match) => {
         console.log('Push메시지가 발송되었습니다.');
         console.log(response);
     });
-});
-
-bot.onText(/날씨/, (msg, match) => {
-  
 });
 
 bot.onText(/.+/, (msg, match) => {
