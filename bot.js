@@ -238,7 +238,6 @@ bot.onText(/.+/, (msg, match) => {
     console.error('ERROR about sessionClient :', err);
   });
 
-
 });
 
 
