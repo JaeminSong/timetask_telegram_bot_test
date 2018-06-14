@@ -67,10 +67,7 @@ bot.onText(/\/메뉴/, function(msg, match) {
 });
 
 bot.onText(/\/kma/, function(msg, match) {
-	var watchId = navigator.geolocation.watchPosition(function(position){
-	console.log('latitude: ', position.coords.latitude);
-	console.log('longitude: ', position.coords.longitude);
-	});
+
 });
 
 bot.on('callback_query', function (msg) {
