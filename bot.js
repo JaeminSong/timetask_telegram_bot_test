@@ -67,7 +67,11 @@ bot.onText(/\/메뉴/, function(msg, match) {
 });
 
 bot.onText(/\/kma/, function(msg, match) {
-
+	navigator.geolocation.getCurrentPosition(function(position){
+	    console.log('latitude: ', position.coords.latitude);
+	    console.log('longitude: ', position.coords.longitude);
+		bot.sendMessage(msg.chat.id, position.coords.latitude);
+	    });
 });
 
 bot.on('callback_query', function (msg) {
@@ -87,8 +91,9 @@ bot.on('callback_query', function (msg) {
 			console.log("error: "+err); return; 
 		      }
 
-		      var city = $("location:nth-child(1) > city").text();
-		      var date = $("channel:nth-child(1) > pubDate").text() + ' 발표';
+		      //var city = $("location:nth-child(1) > city").text();
+		      var city = $("item:nth-child(1) > category").text();
+		      var date = $("channel:nth-child(1) > pubDate").text() + ' 발표, 주소: ' + city;
 		      bot.sendMessage(msg.from.id, date);
 		      var temp = '온도: '+$("data:nth-child(1) > temp").text()+', '+$("data:nth-child(1) > wfKor").text();
 		      bot.sendMessage(msg.from.id, temp);
