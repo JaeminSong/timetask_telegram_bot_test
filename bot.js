@@ -42,8 +42,8 @@ const keyboard = Markup.inlineKeyboard([
   bot.sendMessage(msg.chat.id, text, Extra.markup(keyboard));
 });*/
 
-bot.onText(/\/메뉴/, function(msg, match) {
-  var text = '원하시는 메뉴를 선택하세요.';
+bot.onText(/\/start/, function(msg, match) {
+  var text = '안녕하세요. 텔레그램 챗봇입니다. 현재는 아래 메뉴의 기능만 가능합니다. 원하시는 메뉴를 선택해주세요.';
  
   var keyboardStr = JSON.stringify({
       inline_keyboard: [
