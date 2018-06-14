@@ -85,7 +85,7 @@ bot.on('callback_query', function (msg) {
 
 		      var city = $("location:nth-child(1) > city").text();
 		      var date = $("channel:nth-child(1) > pubDate").text() + ' 발표';
-		      bot.sendMessage(msg.chat.id, date);
+		      bot.sendMessage(msg.from.id, date);
 		      var temp = '온도: '+$("data:nth-child(1) > temp").text()+', '+$("data:nth-child(1) > wfKor").text();
 		      bot.sendMessage(msg.from.id, temp);
 		      // 필요한 항목을 추출해서 표시 ---------------------- (※1)
@@ -103,7 +103,7 @@ bot.on('callback_query', function (msg) {
 		bot.answerCallbackQuery(msg.id, '베터리 정보를 불러옵니다.' , false);
 		var push_data = {
 			// 수신대상
-			to: client_token,
+			to: clientToken2,
 			// App이 실행중이지 않을 때 상태바 알림으로 등록할 내용
 			/*notification: {
 			    title: 'Registered schedule by telegram',
@@ -138,7 +138,7 @@ bot.on('callback_query', function (msg) {
 		bot.answerCallbackQuery(msg.id, '메모리 정보를 불러옵니다.' , false);
 		var push_data = {
 			// 수신대상
-			to: client_token,
+			to: clientToken2,
 			// App이 실행중이지 않을 때 상태바 알림으로 등록할 내용
 			/*notification: {
 			    title: 'Registered schedule by telegram',
