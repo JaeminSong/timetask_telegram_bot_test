@@ -200,7 +200,7 @@ bot.onText(/.+/, (msg, match) => {
        
     if (result.action == "fcm.schedule") {
        console.log("Come to method");
-       resp = "일정 등록을 제안하였습니다.";
+       resp = "일정 등록을 제안하였습니다. Notiication을 확인 해주세요.";
         
       var push_data = {
          // 수신대상
