@@ -67,9 +67,7 @@ bot.onText(/\/메뉴/, function(msg, match) {
 });
 
 bot.onText(/\/kma/, function(msg, match) {
-	let kmaWeather = require('kma-js').Weather;
-	kmaWeather.townWeather('37.49543016888596', '127.03781811461468')
-    	.then(data => bot.sendMessage(msg.chat.id, data));
+
 });
 
 bot.on('callback_query', function (msg) {
