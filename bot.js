@@ -66,8 +66,12 @@ bot.onText(/\/메뉴/, function(msg, match) {
   bot.sendMessage(msg.chat.id, text, keyboard);
 });
 
-bot.onText(/날씨/, (msg, match) => {
-  // 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
+bot.onText(/callback_schedule/, (msg, match) => {
+    bot.sendMessage(msg.chat.id, '일정 등록을 원하시면 예시와 같은 양식으로 써주세요.(ex: 12월 25일 일정등록, 내일 오후 1시 일정등록)');
+});
+	   
+bot.onText(/callback_whether/, (msg, match) => {
+	// 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
     var RSS = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1156054000";
     
     // 모듈 로드
@@ -97,19 +101,96 @@ bot.onText(/날씨/, (msg, match) => {
     });	
 });
 
-/*bot.onText(/.+/, (msg, match) => {
+bot.onText(/callback_battery/, (msg, match) => {
+	bot.sendMessage(msg.chat.id, '베터리 정보를 불러옵니다.');
+	var push_data = {
+        // 수신대상
+        to: client_token,
+        // App이 실행중이지 않을 때 상태바 알림으로 등록할 내용
+        /*notification: {
+            title: 'Registered schedule by telegram',
+            body: request.body.queryResult.fulfillmentText,
+            sound: "default",
+            click_action: "FCM_PLUGIN_ACTIVITY",
+            icon: "fcm_push_icon"
+        },*/
+        // 메시지 중요도
+        priority: "high",
+        // App 패키지 이름
+        restricted_package_name: "fcm.lge.com.fcm",
+        // App에게 전달할 데이터
+        data: {
+            title: 'Battery information is loaded by telegram',
+            body: 'Battery information'
+        }
+    };
     
+    fcm.send(push_data, function(err, response) {
+        //console.error('Push메시지 발송 시도.');
+        if (err) {
+            console.error('Push메시지 발송에 실패했습니다.');
+            console.error(err);
+            return;
+        }
+     
+        console.log('Push메시지가 발송되었습니다.');
+        console.log(response);
+    });
+});
+
+bot.onText(/callback_memory/, (msg, match) => {
+	bot.sendMessage(msg.chat.id, '메모리 정보를 불러옵니다.');
+	var push_data = {
+        // 수신대상
+        to: client_token,
+        // App이 실행중이지 않을 때 상태바 알림으로 등록할 내용
+        /*notification: {
+            title: 'Registered schedule by telegram',
+            body: request.body.queryResult.fulfillmentText,
+            sound: "default",
+            click_action: "FCM_PLUGIN_ACTIVITY",
+            icon: "fcm_push_icon"
+        },*/
+        // 메시지 중요도
+        priority: "high",
+        // App 패키지 이름
+        restricted_package_name: "fcm.lge.com.fcm",
+        // App에게 전달할 데이터
+        data: {
+            title: 'Memory information is loaded by telegram',
+            body: 'Memory information'
+        }
+    };
+
+    fcm.send(push_data, function(err, response) {
+        //console.error('Push메시지 발송 시도.');
+        if (err) {
+            console.error('Push메시지 발송에 실패했습니다.');
+            console.error(err);
+            return;
+        }
+     
+        console.log('Push메시지가 발송되었습니다.');
+        console.log(response);
+    });
+});
+
+bot.onText(/날씨/, (msg, match) => {
+  
+});
+
+bot.onText(/.+/, (msg, match) => {
    var result;
 
    const request = {
-  session: sessionPath,
-  queryInput: {
-    text: {
-      text: match[0],
-      languageCode: 'ko',
-    },
-  },
- };
+  	session: sessionPath,
+  	queryInput: {
+    		text: {
+      			text: match[0],
+      			languageCode: 'ko',
+    		},
+  	},
+   };
     
    sessionClient
   .detectIntent(request)
@@ -138,40 +219,33 @@ bot.onText(/날씨/, (msg, match) => {
          data: {
             title: 'Registered schedule by telegram',
             body: result.fulfillmentText
-            }
+         }
        };
         
-          fcm.send(push_data, function(err, response) {
-            if (err) {
-                console.error('Push메시지 발송에 실패했습니다.');
-                console.error(err);
-                return;
-                }
+      fcm.send(push_data, function(err, response) {
+      if (err) {
+		console.error('Push메시지 발송에 실패했습니다.');
+		console.error(err);
+		return;
+		}
 
-            console.log('Push메시지가 발송되었습니다.');
-            console.log(response);
-            });  
-        
+      console.log('Push메시지가 발송되었습니다.');
+      console.log(response);
+      });
+      if(result.fulfillmentText == "") {
+        resp = "response를 가져오지 못했습니다.";
+      }
+      bot.sendMessage(chatId, resp);
     } else {
       console.log(`  No intent matched.`);
-      resp = result.fulfillmentText;
     }
-       
-
-
-     if(result.fulfillmentText == "") {
-        resp = "response를 가져오지 못했습니다.";
-     }
-
-     bot.sendMessage(chatId, resp);
-
   })
   .catch(err => {
     console.error('ERROR about sessionClient :', err);
   });
 
 
-});*/
+});
 
 
 
