@@ -67,7 +67,7 @@ bot.onText(/\/메뉴/, function(msg, match) {
 });
 
 bot.on('callback_query', function (msg) {
-  bot.answerCallbackQuery(msg.id, 'You hit a button!' + , false);
+  bot.answerCallbackQuery(msg.id, 'You hit a button!' , false);
 });
 
 bot.onText(/callback_schedule/, (msg, match) => {
