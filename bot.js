@@ -68,7 +68,8 @@ bot.onText(/\/메뉴/, function(msg, match) {
 
 bot.on('callback_query', function (msg) {
 	if(msg.data == 'callback_schedule'){
-		bot.sendMessage(msg.id, '일정 등록을 원하시면 예시와 같은 양식으로 써주세요.(ex: 12월 25일 일정등록, 내일 오후 1시 일정등록)');
+		//bot.sendMessage(msg.id, '일정 등록을 원하시면 예시와 같은 양식으로 써주세요.(ex: 12월 25일 일정등록, 내일 오후 1시 일정등록)');
+		bot.answerCallbackQuery(msg.id, 'You hit a button!'+msg.data , false);
 	}
   //bot.answerCallbackQuery(msg.id, 'You hit a button!'+msg.data , false);
 });
