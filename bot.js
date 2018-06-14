@@ -92,7 +92,7 @@ bot.on('callback_query', function (msg) {
 		      }
 
 		      //var city = $("location:nth-child(1) > city").text();
-		      var city = $("item:nth-child(1) > category").text();
+		      var city = $("channel:nth-child(1) > title").text();
 		      var date = $("channel:nth-child(1) > pubDate").text() + ' 발표, 주소: ' + city;
 		      bot.sendMessage(msg.from.id, date);
 		      var temp = '온도: '+$("data:nth-child(1) > temp").text()+', '+$("data:nth-child(1) > wfKor").text();
