@@ -45,13 +45,13 @@ var firebase = require('firebase');
   };
 firebase.initializeApp(config);
 
-const messaging =  firebase.messaging();
+//const messaging =  firebase.messaging();
 
 // Add the public key generated from the console here.
-messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
+firebase.messaging().usePublicVapidKey(process.env.FCM_PUSH_AUTH);
 
- messaging.onTokenRefresh(function() {
-    messaging.getToken().then(function(refreshedToken) {
+ firebase.messaging().onTokenRefresh(function() {
+    firebase.messaging().getToken().then(function(refreshedToken) {
       console.log('Token refreshed: '+refreshedToken);
     }).catch(function(err) {
       console.log('Unable to retrieve refreshed token ', err);
@@ -60,13 +60,13 @@ messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
 
   // Get Instance ID token. Initially this makes a network call, once retrieved
   // subsequent calls to getToken will return from cache.
-  messaging.getToken().then(function(currentToken) {
+  firebase.messaging().getToken().then(function(currentToken) {
     console.log('Token refreshed: '+currentToken);
   }).catch(function(err) {
     console.log('An error occurred while retrieving token. ', err);
   });
 
-messaging.onMessage(function(payload) {
+firebase.messaging().onMessage(function(payload) {
   console.log('Message received. ', payload);
   // ...
 });
