@@ -46,7 +46,7 @@ var firebase = require('firebase-admin');
   
   var app = firebase.initializeApp(config);*/
 var app = firebase.initializeApp({
-  credential: admin.credential.cert({
+  credential: firebase.credential.cert({
     projectId: process.env.PROJECT_ID,
     clientEmail: process.env.FCM_EMAIL,
     privateKey: process.env.API_KEY
