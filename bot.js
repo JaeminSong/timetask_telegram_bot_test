@@ -27,6 +27,7 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 var fcm = new FCM(serverKey);
 
+
 //Firebase 메세지 수신
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
