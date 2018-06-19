@@ -27,6 +27,38 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 var fcm = new FCM(serverKey);
 
+//Firebase 메세지 수신
+importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+
+firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
+const messaging = firebase.messaging();
+
+// Add the public key generated from the console here.
+messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
+
+ messaging.onTokenRefresh(function() {
+    messaging.getToken().then(function(refreshedToken) {
+      console.log('Token refreshed: '+refreshedToken);
+    }).catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+    });
+  });
+
+  // Get Instance ID token. Initially this makes a network call, once retrieved
+  // subsequent calls to getToken will return from cache.
+  messaging.getToken().then(function(currentToken) {
+    console.log('Token refreshed: '+currentToken);
+  }).catch(function(err) {
+    console.log('An error occurred while retrieving token. ', err);
+  });
+}
+
+messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
+  // ...
+});
+
 /*bot.onText(/\/start/, function(msg, match) {
   var text = '원하는 기능을 선택해주세요.';
  
