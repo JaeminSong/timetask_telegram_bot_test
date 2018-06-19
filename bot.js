@@ -53,7 +53,6 @@ messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
   }).catch(function(err) {
     console.log('An error occurred while retrieving token. ', err);
   });
-}
 
 messaging.onMessage(function(payload) {
   console.log('Message received. ', payload);
