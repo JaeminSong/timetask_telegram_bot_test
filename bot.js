@@ -32,8 +32,20 @@ var fcm = new FCM(serverKey);
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 var firebase = require('firebase');
 
-var app = firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
-const messaging =  app.messaging();
+//firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
+
+// Initialize Firebase
+  var config = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.FCM_SENDER_ID
+  };
+firebase.initializeApp(config);
+
+const messaging =  firebase.messaging();
 
 // Add the public key generated from the console here.
 messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
