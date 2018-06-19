@@ -48,7 +48,7 @@ firebase.initializeApp(config);
 //const messaging =  firebase.messaging();
 
 // Add the public key generated from the console here.
-firebase.messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
+//firebase.messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
 
  firebase.messaging.onTokenRefresh(function() {
     firebase.messaging.getToken().then(function(refreshedToken) {
