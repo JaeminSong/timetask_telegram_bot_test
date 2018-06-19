@@ -27,10 +27,38 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 var fcm = new FCM(serverKey);
 
+//Firebase Database
+var firebase = require('firebase');
+
+var config = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.FCM_SENDER_ID
+  };
+  
+var app = firebase.initializeApp(config);
+
+var ref = firebase.database().ref('newagent-27551');
+var messagesRef = ref.child('messages');
+
+var messageRef = messagesRef.push();
+var messageKey = messagesRef.key;
+var payload = {};
+var message = {
+	text: 'hello database'
+};
+
+payload['userMessages/'+ messageKey] = message;
+
+ref.update(payload);
+
 //Firebase 메세지 수신
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
-var firebase = require('firebase-admin');
+//var firebase = require('firebase-admin');
 
 //firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
 
@@ -45,7 +73,7 @@ var firebase = require('firebase-admin');
   };
   
   var app = firebase.initializeApp(config);*/
-var app = firebase.initializeApp({
+/*var app = firebase.initializeApp({
   credential: firebase.credential.cert({
     projectId: process.env.PROJECT_ID,
     clientEmail: process.env.FCM_EMAIL,
@@ -79,7 +107,7 @@ const messaging =  app.messaging();
 messaging.onMessage(function(payload) {
   console.log('Message received. ', payload);
   // ...
-});
+});*/
 
 /*bot.onText(/\/start/, function(msg, match) {
   var text = '원하는 기능을 선택해주세요.';
