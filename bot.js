@@ -30,7 +30,7 @@ var fcm = new FCM(serverKey);
 //Firebase 메세지 수신
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
-var firebase = require('firebase');
+var firebases = require('firebase');
 
 //firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
 
@@ -43,7 +43,7 @@ var firebase = require('firebase');
     storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.FCM_SENDER_ID
   };
-firebase.initializeApp(config);
+var firebase = firebases.initializeApp(config);
 
 //const messaging =  firebase.messaging();
 
