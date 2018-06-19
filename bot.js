@@ -29,8 +29,9 @@ var fcm = new FCM(serverKey);
 
 
 //Firebase 메세지 수신
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+//importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+//importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+var firebase = require('firebase');
 
 firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
 const messaging = firebase.messaging();
