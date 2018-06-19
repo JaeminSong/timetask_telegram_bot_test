@@ -35,7 +35,7 @@ var firebase = require('firebase-admin');
 //firebase.initializeApp({ 'messagingSenderId': process.env.FCM_SENDER_ID});
 
 // Initialize Firebase
-  var config = {
+  /*var config = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
@@ -43,9 +43,19 @@ var firebase = require('firebase-admin');
     storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.FCM_SENDER_ID
   };
-firebase.initializeApp(config);
+  
+  var app = firebase.initializeApp(config);*/
+var app = firebase.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.PROJECT_ID,
+    clientEmail: process.env.FCM_EMAIL,
+    privateKey: process.env.API_KEY
+  }),
+  databaseURL: process.env.DATABASE_URL,
+  messagingSenderId: process.env.FCM_SENDER_ID
+});
 
-const messaging =  firebase.messaging();
+const messaging =  app.messaging();
 
 // Add the public key generated from the console here.
 //firebase.messaging.usePublicVapidKey(process.env.FCM_PUSH_AUTH);
