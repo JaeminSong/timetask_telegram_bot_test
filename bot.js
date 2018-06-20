@@ -66,6 +66,9 @@ messagesRef.on('child_removed', function(snap){
 messagesRef.on('child_changed', function(snap){
 	console.log('changed', snap.key);
 	console.log('changed', snap.val());
+	if(snap.val().text != ''){
+		bot.sendMessage(snap.val().chatId, snap.val().text);
+	}
 });
 
 //Firebase 메세지 수신
@@ -209,6 +212,15 @@ bot.on('callback_query', function (msg) {
 		    });	
 	}else if(msg.data == 'callback_battery'){
 		bot.answerCallbackQuery(msg.id, '베터리 정보를 불러옵니다.' , false);
+		var message = {
+			text: '',
+			chatId: msg.from.id,
+			status: msg,data
+		};
+
+		payload[messageKey+'/'+clientToken2] = message;
+
+		ref.update(payload);
 		var push_data = {
 			// 수신대상
 			to: clientToken2,
@@ -244,6 +256,16 @@ bot.on('callback_query', function (msg) {
 		    });
 	}else if(msg.data == 'callback_memory'){
 		bot.answerCallbackQuery(msg.id, '메모리 정보를 불러옵니다.' , false);
+		var message = {
+			text: '',
+			chatId: msg.from.id,
+			status: msg,data
+		};
+
+		payload[messageKey+'/'+clientToken2] = message;
+
+		ref.update(payload);
+		
 		var push_data = {
 			// 수신대상
 			to: clientToken2,
