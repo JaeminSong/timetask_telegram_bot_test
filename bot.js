@@ -49,6 +49,7 @@ var message = {
 	text: 'hello database'
 };
 
+
 payload['userMessages/'+ messageKey] = message;
 
 ref.update(payload);
