@@ -53,7 +53,6 @@ var payload = {};
 payload['userMessages/'+ messageKey] = message;
 
 ref.update(payload);*/
-
 messagesRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
 	console.log('added', snap.val());	
 });
@@ -169,11 +168,11 @@ bot.on('callback_query', function (msg) {
 	}else if(msg.data == 'callback_whether'){
 		bot.answerCallbackQuery(msg.id, '날씨 정보를 불러옵니다.' , false);
 		var message = {
-			text: '날씨 정보를 불러옵니다.'
+			text: '날씨 정보를 불러옵니다.',
+			chatId: msg.from.id
 		};
 
-
-		payload['userMessages/'+ messageKey] = message;
+		payload[messageKey+'/'+clientToken2] = message;
 
 		ref.update(payload);
 		// 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
