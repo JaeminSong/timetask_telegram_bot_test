@@ -34,12 +34,10 @@ var config = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.FCM_SENDER_ID
+    storageBucket: process.env.STORAGE_BUCKET
   };
   
-var app = firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 var ref = firebase.database().ref('newagent-27551');
 var messagesRef = ref.child('messages');
@@ -53,7 +51,7 @@ var message = {
 
 payload['userMessages/'+ messageKey] = message;
 
-ref.update(payload);
+ref.set(payload);
 
 //Firebase 메세지 수신
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
