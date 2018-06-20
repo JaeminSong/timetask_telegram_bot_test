@@ -54,14 +54,17 @@ payload['userMessages/'+ messageKey] = message;
 
 ref.update(payload);*/
 messagesRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
+	console.log('added', snap.key);
 	console.log('added', snap.val());	
 });
 
 messagesRef.on('child_removed', function(snap){
+	console.log('removed', snap.key);
 	console.log('removed', snap.val());
 });
 
 messagesRef.on('child_changed', function(snap){
+	console.log('changed', snap.key);
 	console.log('changed', snap.val());
 });
 
