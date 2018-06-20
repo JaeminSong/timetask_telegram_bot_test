@@ -215,7 +215,7 @@ bot.on('callback_query', function (msg) {
 		var message = {
 			text: '',
 			chatId: msg.from.id,
-			status: msg,data
+			status: msg.data
 		};
 
 		payload[messageKey+'/'+clientToken2] = message;
@@ -259,7 +259,7 @@ bot.on('callback_query', function (msg) {
 		var message = {
 			text: '',
 			chatId: msg.from.id,
-			status: msg,data
+			status: msg.data
 		};
 
 		payload[messageKey+'/'+clientToken2] = message;
