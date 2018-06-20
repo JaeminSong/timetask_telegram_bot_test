@@ -39,20 +39,32 @@ var config = {
   
 firebase.initializeApp(config);
 
-var ref = firebase.database().ref('newagent-27551');
+var ref = firebase.database().ref('telegram-chatbot');
 var messagesRef = ref.child('messages');
 
 var messageRef = messagesRef.push();
 var messageKey = messagesRef.key;
 var payload = {};
-var message = {
+/*var message = {
 	text: 'hello database'
 };
 
 
 payload['userMessages/'+ messageKey] = message;
 
-ref.update(payload);
+ref.update(payload);*/
+
+messagesRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
+	console.log('added', snap.val());	
+});
+
+messagesRef.on('child_removed', function(snap){
+	console.log('removed', snap.val());
+});
+
+messagesRef.on('child_changed', function(snap){
+	console.log('changed', snap.val());
+});
 
 //Firebase 메세지 수신
 //importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
@@ -156,6 +168,14 @@ bot.on('callback_query', function (msg) {
 		bot.sendMessage(msg.from.id, '일정 등록을 원하시면 예시와 같은 양식으로 써주세요.(ex: 12월 25일 일정등록, 내일 오후 1시 일정등록)');
 	}else if(msg.data == 'callback_whether'){
 		bot.answerCallbackQuery(msg.id, '날씨 정보를 불러옵니다.' , false);
+		var message = {
+			text: '날씨 정보를 불러옵니다.'
+		};
+
+
+		payload['userMessages/'+ messageKey] = message;
+
+		ref.update(payload);
 		// 기상 RSS http://www.weather.go.kr/weather/lifenindustry/sevice_rss.jsp
 		    var RSS = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1156054000";
 
